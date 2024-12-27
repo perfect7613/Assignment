@@ -1,8 +1,28 @@
-# React + Vite
+# WhatsApp Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time chat application built with React, InstantDB, and IndexedDB for offline support.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 💬 Real-time messaging
+- 👤 Contact management
+- 🔍 Contact search functionality
+- 💾 Offline message storage with IndexedDB
+- 🔄 Automatic message syncing
+- 📱 Responsive design
+
+## Tech Stack
+
+- [React](https://reactjs.org/) - Frontend framework
+- [InstantDB](https://instantdb.com/) - Real-time database
+- [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) - Offline storage
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [Lucide React](https://lucide.dev/) - Icons
+- [Vite](https://vitejs.dev/) - Build tool
+
+## Getting Started
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd whatsapp-clone

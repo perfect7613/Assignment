@@ -62,22 +62,41 @@ export const useDatabase = () => {
     }
   }, [getMessagesByContactId, syncWithIndexedDB]);
 
+  const getContactDetails = useCallback(async (contactId) => {
+    if (!contactId) return null;
+    try {
+      // Use queryOnce to fetch contact details
+      const { data } = await db.queryOnce({
+        contacts: {
+          $: {
+            where: { id: contactId } // Assuming you have an ID field in your contacts
+          }
+        }
+      });
+
+      return data?.contacts ? data.contacts[0] : null; // Return the first contact found
+    } catch (error) {
+      console.error('Error fetching contact details:', error);
+      return null;
+    }
+  }, []);
+
   const addMessage = async (messageData) => {
     const messageId = id();
     const newMessage = {
       id: messageId,
-      ...messageData
+      ...messageData,
     };
 
     try {
+
+      if (!newMessage.contactId || !newMessage.text || !newMessage.timestamp || !newMessage.sender) {
+        throw new Error('Invalid message structure');
+      }
       // Store in InstantDB
       await db.transact([
-        {
-          messages: {
-            [messageId]: newMessage
-          }
-        }
-      ]);
+        db.tx.messages[messageId].update(newMessage),
+      ]);  
       
       // Store in IndexedDB for offline access
       await storeData('messages', newMessage);
@@ -98,6 +117,7 @@ export const useDatabase = () => {
   return { 
     db, 
     getMessagesForContact, 
+    getContactDetails, // Return the new function
     addMessage 
   };
 };
